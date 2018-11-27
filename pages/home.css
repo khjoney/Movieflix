@@ -1,0 +1,131 @@
+
+
+/* Nav Bar Styles */
+.nav-icon:hover{
+	text-decoration: none;
+	color: blue;
+}
+
+.fa-bars:hover{
+	text-decoration: none;
+	color: blue;
+}
+
+.fa-bars{
+	font-size: 40px;
+	color: #ffc107;
+}
+
+.nav-icon{
+	font-size: 50px;
+	color: #ffc107;
+}
+
+
+#brand{
+	position: absolute;
+	right: 0;
+	font-size: 30px;
+	color: #ffc107;
+}
+
+#search-button{
+	font-size: 25px;
+	color: #ffc107;
+}
+
+#search-text{
+	height: 52px;
+	width: 300px;
+}
+
+
+/* Image Gallery Styles */
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+}
+
+#center-col
+{
+width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 970px) {
+    .column {
+        width: 100%;
+    }
+	#center-col
+	{
+		width: 100%;
+	}
+}
+
+div.gallery 
+{
+	margin: 10px;
+	border: 1px solid #111;
+	float: left;
+	width: 180px;
+}
+
+div.gallery:hover 
+{
+	border: 1px solid #777;
+}
+
+div.gallery img 
+{
+	width: 100%;
+	height: auto;
+}
+
+div.desc 
+{
+	padding: 15px;
+	text-align: center;
+}
+
+#Back
+{
+   display: block;
+   clear: both;
+   margin: auto;
+}
+
+body
+{
+   background-color: #111;
+   color: #ffc107;
+}
+
+
+/* Modal Synopsis Page Styles */
+.modal-title, .modal-body{
+	color: black;
+}
+
+#buttonDisplay{
+    width: 100%;
+    background: none;
+    color: black;
+    padding: 5px;
+    font-size: 19px;
+    /* cursor: pointer; */
+    margin: 12px 0;
+}
+
+
+/* Formatting Styles */
+.line{
+	background-color: #ffc107;
+}

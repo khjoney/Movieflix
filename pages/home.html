@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="en">
+  
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	
+	<!-- Title (name in browser tab) -->
+	<title>MovieFlix</title>
+	
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+	<!-- Home Page CSS -->
+    <link rel="stylesheet" type="text/css" href="home.css">
+	<style>
+
+	</style>
+</head>
+
+
+<body onload="display(defaults)">
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark">
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="fas fa-bars bars"></span>
+		</button>
+
+  
+		<!-- COLLAPSABLE NAVBAR -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			
+			<!-- MOVIE FLIX BRAND NAME-->
+			<div class="navbar-brand justify-content-end" id="brand">MovieFlix</div>
+			
+			<!-- NAVBAR BUTTONS-->
+
+				<!-- HOME BUTTON -->
+			<div class="nav-item mx-1 my-2">
+				<a class="fas fa-home nav-icon" href="Home.html"></a>
+			</div>
+			<!-- SETTINGS BUTTON -->
+			<div class="nav-item mx-2 my-2">
+				<a class="fas fa-cog nav-icon" href="Home.html"></a>
+			</div>
+
+
+			<!-- SEARCH BAR COMBINED W/ BUTTON-->
+			<div class="form-inline mx-1 my-2">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<button class="btn btn-outline-secondary" type="button" id="search-button">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+					<input type="text" class="form-control" placeholder="Search (e.g. Mission: Impossible)" id="search-text">
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+	<!-- JavaScript/JQuery for Search -->
+	<script>
+		<!-- Declarations -->
+		var searchQuery;
+		var queryLowerCase;
+		var ititle;
+		var selectionFound;
+		var selection;
+		
+		var media = ["the notebook", "murder on the orient express", "the haunting in connecticut", "johnny english strikes again", "mission: impossible", "the mask", "die hard", "halloween", "sherlock holmes" , "everafter"]; 
+		
+		var mediaClassName = ["the-notebook", "murder-on-the-orient-express", "the-haunting-in-connecticut", "johnny-english-strikes-again", "mission-impossible", "the-mask", "die-hard", "halloween", "sherlock-holmes", "everafter"]; 
+		
+		// Get Search Query from Search Box
+		$(document).ready(function(){
+			$("#search-button").click(function(){
+				searchQuery = $("#search-text").val();
+				queryLowerCase = searchQuery.toLowerCase();
+				//alert(queryLowerCase);
+				
+				// Compare to stored media
+				selectionFound == false;
+				for (ititle = 0; ititle < media.length; ititle++){
+					if (queryLowerCase == media[ititle]){
+						selectionFound = true;
+						selection = document.getElementsByClassName(mediaClassName[ititle]);
+					}
+				}
+				
+				
+				// Find and display the title
+				if (selectionFound){
+					document.getElementById("search-result").innerHTML = "'" + searchQuery + "' has been located.";
+					display(selection);
+				}else{
+					document.getElementById("search-result").innerHTML = "Cannot find request '" + searchQuery + "'.";
+					
+					selectionFound = false;
+				}
+			});
+		});
+	</script>
+	
+	
+	<h4 id="search-result"></h4>
+	<hr class="line"></hr>
+	
+	<div class="column">
+	<p></p>
+	</div>
+	<div class="column" id = "center-col">
+
+		<!-- Image Gallary/Browse -->
+		<div class="row justify-content-center md-4">
+		<!-- Comedy -->
+		<div class="gallery default" onclick="display(comedies)">
+		  <img src="../images/Comedy/comedy.jpg" alt="Comedy" width="300" height="200">
+		  <div class="desc">Comedy</div>
+		</div>
+
+		<!-- Johnny English Strikes Back -->
+		<div class="gallery comedy johnny-english-strikes-again" data-toggle="modal" data-target = "#comedy1">
+		  <img src="../images/Comedy/comedy.jpg" alt="Johnny English Strikes Again" width="300" height="200">
+		  <div class="desc">Johnny English Strikes Again</div>
+		</div>
+
+		<!-- The Mask -->
+		<div class="gallery comedy the-mask" data-toggle="modal" data-target = "#comedy2">
+		  <img src="../images/Comedy/comedy.jpg" alt="The Mask" width="300" height="200">
+		  <div class="desc">The Mask</div>
+		</div>
+
+		
+		<!-- Action -->
+		<div class="gallery default" onclick="display(actions)">
+		  <img src="../images/Action/action.jpg" alt="Action" width="300" height="200">
+		  <div class="desc">Action</div>
+		</div>
+
+		<!--  Mission Impossible -->
+		<div class="gallery action mission-impossible" data-toggle="modal" data-target = "#action1">
+		  <img src="../images/Action/action.jpg" alt="Mission Impossible" width="300" height="200">
+		  <div class="desc" >Mission: Impossible</div>
+		</div>
+
+		<!-- Die Hard-->
+		<div class="gallery action die-hard" data-toggle="modal" data-target = "#action2">
+		  <img src="../images/Action/action.jpg" alt="Die Hard" width="300" height="200">
+		  <div class="desc">Die Hard</div>
+		</div>
+
+		
+		<!-- Horror -->
+		<div class="gallery default" onclick="display(horrors)">
+		  <img src="../images/Horror/horror.jpg" alt="Horrors" width="300" height="200">
+		  <div class="desc">Horror</div>
+		</div>
+
+		<!-- The Haunting in Connecticut -->
+		<div class="gallery horror the-haunting-in-connecticut" data-toggle="modal" data-target = "#horror1">
+		  <img src="../images/Horror/horror.jpg" alt="The Haunting In Connecticut" width="300" height="200">
+		  <div class="desc">The Haunting in Connecticut</div>
+		</div>
+
+		<!-- Halloween -->
+		<div class="gallery horror halloween" data-toggle="modal" data-target = "#horror2">
+		  <img src="../images/Horror/horror.jpg" alt="Halloween" width="300" height="200">
+		  <div class="desc">Halloween</div>
+		</div>
+		
+		
+		<!-- Mystery -->
+		<div class="gallery default" onclick="display(mysterys)">
+		  <img src="../images/Mystery/mystery.jpg" alt="Mystery" width="300" height="200">
+		  <div class="desc">Mystery</div>
+		</div>
+
+		<!-- Murder on the Orient Express -->
+		<div class="gallery mystery murder-on-the-orient-express" data-toggle="modal" data-target = "#mystery1">
+		  <img src="../images/Mystery/mystery.jpg" alt="Murder on the Orient Express" width="300" height="200">
+		  <div class="desc">Murder on the Orient Express</div>
+		</div>
+
+		<!-- Sherlock Holmes -->
+		<div class="gallery mystery sherlock-holmes" data-toggle="modal" data-target = "#mystery2">
+		  <img src="../images/Mystery/mystery.jpg" alt="Sherlock Holmes" width="300" height="200">
+		  <div class="desc">Sherlock Holmes</div>
+		</div>
+	
+	
+		<!-- Romance -->
+		<div class="gallery default" onclick="display(romance)">
+		  <img src="../images/Romance/romance.jpg" alt="Romance" width="300" height="200">
+		  <div class="desc">Romance</div>
+		</div>
+
+		<!-- Murder on the Orient Express -->
+		<div class="gallery romance the-notebook" data-toggle="modal" data-target = "#romance1">
+		  <img src="../images/Romance/romance.jpg" alt="The Notebook" width="300" height="200">
+		  <div class="desc">The Notebook</div>
+		</div>
+
+		<!-- Sherlock Holmes -->
+		<div class="gallery romance everafter" data-toggle="modal" data-target = "#romance2">
+		  <img src="../images/Romance/romance.jpg" alt="Everafter" width="300" height="200">
+		  <div class="desc">Everafter</div>
+		</div>
+	
+		<!-- Watch Later -->
+		<div class="gallery default" onclick="display(laters)">
+		  <img src="../images/WatchLater/watchlater.jpg" alt="Watch Later" width="300" height="200">
+		  <div class="desc">Watch Later</div>
+		</div>
+
+		<div class="gallery later" data-toggle="modal" data-target = "#wl1">
+		  <img src="../images/WatchLater/watchlater.jpg" alt="Watch Later" width="300" height="200">
+		  <div class="desc">*Placeholder*</div>
+		</div>
+
+		<div class="gallery later" data-toggle="modal" data-target = "#wl2">
+		  <img src="../images/WatchLater/watchlater.jpg" alt="Watch Later" width="300" height="200">
+		  <div class="desc">*Placeholder*</div>
+		</div>
+	
+	
+		
+		<!-- Suggessted -->
+		<!-- <div class="gallery default" onclick="display(suggestions)"> -->
+		  <!-- <a target="_blank"> -->
+		  <!-- <img src="boat.png" alt="Boat" width="300" height="200"> -->
+		  <!-- </a> -->
+		  <!-- <div class="desc">Suggested</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery suggestion" data-toggle="modal" data-target = "#suggested1"> -->
+		  <!-- <a target="_blank"> -->
+		  <!-- <img src="boat.png" alt="Boat" width="300" height="200"> -->
+		  <!-- </a> -->
+		  <!-- <div class="desc">Ocean Journey</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery suggestion" data-toggle="modal" data-target = "#suggested2"> -->
+		  <!-- <a target="_blank"> -->
+		  <!-- <img src="boat.png" alt="Boat" width="300" height="200"> -->
+		  <!-- </a> -->
+		  <!-- <div class="desc">Suggestion Placeholder</div> -->
+		<!-- </div> -->
+
+		
+		<!-- Continue Watching -->
+		<!-- <div class="gallery default" onclick="display(continues)"> -->
+		  <!-- <img src="golf.png" alt="Golf" width="300" height="200"> -->
+		  <!-- <div class="desc">Continue Watching</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery continue" data-toggle="modal" data-target = "#cw1"> -->
+		  <!-- <img src="golf.png" alt="Golf" width="300" height="200"> -->
+		  <!-- <div class="desc">Golfing</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery continue" data-toggle="modal" data-target = "#cw2"> -->
+		  <!-- <img src="golf.png" alt="Golf" width="300" height="200"> -->
+		  <!-- <div class="desc">Continue Placeholder</div> -->
+		<!-- </div> -->
+
+		
+		<!-- Watch Later -->
+		<!-- <div class="gallery default" onclick="display(laters)"> -->
+		  <!-- <img src="Sun Dudes.png" alt="Sun Dudes" width="300" height="200"> -->
+		  <!-- <div class="desc">Watch Later</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery later" data-toggle="modal" data-target = "#wl"> -->
+		  <!-- <img src="Sun Dudes.png" alt="Sun Dudes" width="300" height="200"> -->
+		  <!-- <div class="desc">Sun Dudes</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery later" data-toggle="modal" data-target = "#wl2"> -->
+		  <!-- <img src="Sun Dudes.png" alt="Sun Dudes" width="300" height="200"> -->
+		  <!-- <div class="desc">Later Placeholder</div> -->
+		<!-- </div> -->
+
+		
+		<!-- Watch Again -->
+		<!-- <div class="gallery default" onclick="display(agains)"> -->
+		  <!-- <img src="Confusion.png" alt="Confusion" width="300" height="200"> -->
+		  <!-- <div class="desc">Watch Again</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery again" data-toggle="modal" data-target = "#wa1"> -->
+		  <!-- <img src="Confusion.png" alt="Confusion" width="300" height="200"> -->
+		  <!-- <div class="desc">Confusion</div> -->
+		<!-- </div> -->
+
+		<!-- <div class="gallery again" data-toggle="modal" data-target = "#wa2"> -->
+		  <!-- <img src="Confusion.png" alt="Confusion" width="300" height="200"> -->
+		  <!-- <div class="desc">Again Placeholder</div> -->
+		<!-- </div> -->
+		
+	</div>
+	<div class="column">
+	</div>
+
+<!-- Back Button -->
+		<button onclick="display(defaults)" id="Back">
+		   Back
+		</button>
+		
+		<!-- Image Gallery JS -->
+		<script>
+			var all = document.getElementsByClassName("gallery");
+			var defaults = document.getElementsByClassName("default");
+			//var suggestions = document.getElementsByClassName("suggestion");
+			//var continues = document.getElementsByClassName("continue");
+			var laters = document.getElementsByClassName("later");
+			//var agains = document.getElementsByClassName("again");
+			var comedies = document.getElementsByClassName("comedy");
+			var actions = document.getElementsByClassName("action");
+			var horrors = document.getElementsByClassName("horror");
+			var mysterys = document.getElementsByClassName("mystery");
+			var romance = document.getElementsByClassName("romance");
+
+			function display(category) {
+				for (i = 0; i < all.length; i++)
+				{
+				   all[i].style.display = "none";
+				}
+				for (j = 0; j < category.length; j++)
+				{
+				   category[j].style.display = "block";
+				}
+				if (category != defaults)
+				{
+				   $("#Back").show();
+				}
+				else
+				{
+				   $("#Back").hide();
+				}
+			}
+		</script>
+	</div>
+		
+    <!--Modal for comedy 1    -->
+	<div class="modal fade" id="comedy1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Johnny English Strikes Back</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			A special agent with a special talent for making mistakes.
+			<br><br>
+			Starring Actor: Rowan Atkinson
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Funny.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+		
+	<!--Modal for comedy 2    -->
+	<div class="modal fade" id="comedy2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">The Mask</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			A zany classic where a man in a mask wreaks havoc while learning about life.
+			<br><br>
+			Starring Actor: Jim Carrey
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Funny.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	
+	<!-- Modal for Action1-->
+	  <div class="modal fade" id="action1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Mission Impossible</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			An American agent went to war with his country.
+			<br><br>
+			Starring Actor: Tom Cruise
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='action.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+		
+		
+	<!--Modal for Action2    -->
+	<div class="modal fade" id="action2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Die Hard</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			After awakening from a four-year coma, he decided to fight back.
+			<br><br>
+			Starring Actor: Bruce Willis 
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='action.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	
+	<!--modal for horror 1    -->
+	<div class="modal fade" id="horror1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">The Haunting in Connecticut</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			A house in the suburbs of Connecticut experiences paranormal events.
+			<br><br>
+			Starring Actors: Kyle Gallner and Virginia Madsen
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Horror.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<!--modal for horror 2    -->
+	<div class="modal fade" id="horror2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Halloween</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			One day of the year brings a cheer to the neighborhood.
+			<br><br>
+			Starring Actor: Jamie Lee Curtis
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Horror.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>    
+		
+	<!--modal for mystery 1    -->
+	 <div class="modal fade" id="mystery1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Murder on the Orient Express</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			While travling through Europe turns dark when a murder must be solved.
+			<br><br>
+			Starring Actors: Kenneth Branagh, Daisy Ridley, Johnny Depp
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Mystery.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<!--modal for mystery 2    -->
+	<div class="modal fade" id="mystery2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Sherlock Holmes</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			This pair of crimefighters will stop at nothing to solve the case.
+			<br><br>
+			Starring Actors: Robert Downey Jr. and Jude Law
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Mystery.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	
+	<!--Modal for Romance 1 -->
+	<div class="modal fade" id="romance1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">The Notebook</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			The standard love story where they fall in love but parents say no.
+			<br><br>
+			Staring Actors: Ryan Gosling, Rachel McAdams
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Romance.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<!--Modal for Romance 2    -->
+	<div class="modal fade" id="romance2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">Everafter</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			A boy who falls in love with a girl who falls in love with a boy who falls in love with a....
+			<br><br>
+			Starring Actors: Drew Barrymore, Anjelica Huston, Dougray Scott, Jeanne Moreau
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Romance.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	
+	<!--Modal for Watch Later 1 -->
+	<div class="modal fade" id="wl1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">*Placeholder*</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			...
+			<br><br>
+			Starring Actors: ...
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Romance.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+		
+	<!--Modal for Watch Later1    -->
+	<div class="modal fade" id="wl2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header text-uppercase" id="SingUpModalHeaderBottom">
+			  <h5 class="modal-title" id="exampleModalLabel">*Placeholder*</h5>
+			  <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body" id="modalBody">
+			...
+			<br><br>
+			Starring Actors: ...
+			</div>
+			<div class="modal-footer" id="SingUpmodalFooter">
+			  <button type="button" id="buttonDisplay" class="btn btn-primary" onclick="location.href='Romance.html'">Play</button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	
+	<!--Modal for Suggested 1    -->
+	<!-- <div class="modal fade" id="suggested1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Suggested1</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+		
+	<!--Modal for suggested 2    -->
+	<!-- <div class="modal fade" id="suggested2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Suggested2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+		
+	<!--Modal for continue watching 1  -->
+	<!-- <div class="modal fade" id="cw1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+
+	<!--modal for continue watching 2    -->
+	<!-- <div class="modal fade" id="cw2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div>     -->
+
+	<!--modal for watch later 1    -->
+	<!-- <div class="modal fade" id="wl1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+		
+	<!--modal for watch later 2    -->
+	<!-- <div class="modal fade" id="wl2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+
+	<!--modal for watch again 1    -->
+	<!-- <div class="modal fade" id="wa1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+
+	<!--modal for watch again 2    -->
+	<!-- <div class="modal fade" id="wa2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+		<!-- <div class="modal-dialog" role="document"> -->
+		  <!-- <div class="modal-content"> -->
+			<!-- <div class="modal-header text-uppercase" id="SingUpModalHeaderBottom"> -->
+			  <!-- <h5 class="modal-title" id="exampleModalLabel">Action2</h5> -->
+			  <!-- <button type="button" class="close" id="closeOption" data-dismiss="modal" aria-label="Close"> -->
+				<!-- <span aria-hidden="true">&times;</span> -->
+			  <!-- </button> -->
+			<!-- </div> -->
+			<!-- <div class="modal-body" id="modalBody"> -->
+			 <!-- THIS IS A TEST SYNONSYS -->
+			<!-- </div> -->
+			<!-- <div class="modal-footer" id="SingUpmodalFooter"> -->
+			  <!-- <button type="button" id="submitSignUp" class="btn btn-primary">Play</button> -->
+			<!-- </div> -->
+		  <!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
+    
+    
+</body>
+
+</html>
